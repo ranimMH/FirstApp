@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -13,18 +13,18 @@ export class LoginComponent implements OnInit {
   connectedUser;
   constructor(private router: Router, private authService: AuthService) {
     this.loginForm = new FormGroup({
-      Email: new FormControl(''),
-      Password: new FormControl('')
+      Email: new FormControl('', [Validators.email, Validators.required]),
+      Password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
   ngOnInit() {
-    const connected = localStorage.getItem('connectedUser');
+    // const connected = localStorage.getItem('connectedUser');
 
-    if (connected) {
-      this.router.navigateByUrl('/todos');
-    } else {
-      this.router.navigateByUrl('/login');
-    }
+    // if (connected) {
+    //   this.router.navigateByUrl('/todos');
+    // } else {
+    //   this.router.navigateByUrl('/login');
+    // }
   }
   loginUser(loginForm) {
     this.authService.checkLogin(loginForm.value).subscribe((data: any) => {

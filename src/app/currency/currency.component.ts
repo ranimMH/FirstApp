@@ -8,17 +8,17 @@ import { Observable } from 'rxjs/Observable';
 })
 export class CurrencyComponent implements OnInit {
 
-  currency: Observable<currency[]>;
+
   currencies = [];
   countries = [];
-  names=[];
+  names = [];
   index;
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
 
     this.apiService.getData().subscribe(data => {
-      console.log(data)
+      console.log(data);
       this.currencies = data;
 
 
@@ -32,31 +32,25 @@ export class CurrencyComponent implements OnInit {
   }
 
   selected(event) {
-    let index = event.target.value;
+    const index = event.target.value;
 
-    console.log(index)
-    let countries = this.currencies[index].Countries[0];
-   
+    console.log(index);
+    const countries = this.currencies[index].Countries[0];
+
     this.countries = Object.keys(countries).map(elem => ({
       'lang': elem, 'value': countries[elem]
     }));
-    console.log(index)
-    let names = this.currencies[index].Name;
-    console.log(names)
+    console.log(index);
+    const names = this.currencies[index].Name;
+    console.log(names);
     this.names = Object.keys(names).map(elem => ({
       'language': elem, 'name': names[elem]
     }));
-console.log(this.names)
+    console.log(this.names);
   }
 
-}
-export class currency {
-  code: String;
-  name: Object;
-  constructor(code: string, name: object) {
-    this.name = name;
-    this.code = code;
-  }
+
+
 }
 
 

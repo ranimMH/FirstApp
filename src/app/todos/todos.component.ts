@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pipe, PipeTransform } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../auth.service';
@@ -17,14 +17,14 @@ export class TodosComponent implements OnInit {
   todos = [];
   constructor(private authService: AuthService) {
     this.todosForm = new FormGroup({
-      input_value: new FormControl(''),
-      input_value2: new FormControl('')
+      input_value: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      input_value2: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit() {
     const connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
-
+    console.log(connectedUser);
     this.authService.getUser(connectedUser._id).subscribe((data: any) => {
       if (data.todos) {
         this.todos = data.todos;
@@ -82,6 +82,6 @@ export class TodosComponent implements OnInit {
       // console.log(new Date().toISOString());
     }
   }
-  
+
 
 }

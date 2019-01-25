@@ -8,19 +8,19 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  // name: FormControl;
-  // lastName: FormControl;
-  // email: FormControl;
-  // pwd: FormControl;
+  name: FormControl;
+  lastName: FormControl;
+  email: FormControl;
+  pwd: FormControl;
   users: Array<User> = new Array<User>();
   registerForm: FormGroup;
 
   constructor(private router: Router, private authService: AuthService) {
     this.registerForm = new FormGroup({
-      name: new FormControl(''),
+      name: new FormControl('', [Validators.required, Validators.minLength(5)]),
       lastName: new FormControl(''),
       Email: new FormControl('', [Validators.email, Validators.required]),
-      Password: new FormControl('')
+      Password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   }
   register(form) {
     this.authService.registerUser(form.value).subscribe(data => {
-      console.log(data)
+      console.log(data);
     });
   }
 

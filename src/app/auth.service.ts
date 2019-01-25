@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private router: Router, private http: HttpClient) {
     if (localStorage.getItem('connectedUser')) {
 
-      this.connectedUser = JSON.parse(localStorage.getItem('connectedUser'))
+      this.connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
     }
   }
   login(loginForm) {
@@ -77,13 +77,13 @@ export class AuthService {
       this.todos.push(todo);
       // localStorage.setItem('todos', JSON.stringify(todo));
 
-      return this.http.post('http://chehir.tn:3000/ranim/user', this.todos)
+      return this.http.post('http://chehir.tn:3000/ranim/user', this.todos);
     }
   }
   isAuth() {
 
     return JSON.parse(localStorage.getItem('connectedUser'));
-    return this.http.get('http://chehir.tn:3000/ranim/login/id')
+    return this.http.get('http://chehir.tn:3000/ranim/login/id');
   }
   getTodo() {
 
@@ -92,14 +92,14 @@ export class AuthService {
   }
 
   updateUser(user, id) {
-    return this.http.post('http://chehir.tn:3000/ranim/update/' + id, user)
+    return this.http.post('http://chehir.tn:3000/ranim/update/' + id, user);
   }
   getUser(id) {
-    return this.http.get('http://chehir.tn:3000/ranim/user/' + id)
+    return this.http.get('http://chehir.tn:3000/ranim/user/' + id);
   }
   checkLogin(user) {
 
-    return this.http.post('http://chehir.tn:3000/ranim/login', user)
+    return this.http.post('http://chehir.tn:3000/ranim/login', user);
 
     // this.router.navigateByUrl('/todos');
   }
@@ -108,9 +108,9 @@ export class AuthService {
     // const usersArray = [];
     // usersArray.push(user);
     // console.log(usersArray)
-    return this.http.post('http://chehir.tn:3000/ranim/register', user)
+    return this.http.post('http://chehir.tn:3000/ranim/register', user);
   }
-getById(id){
-  return this.http.get('http://chehir.tn:3000/ranim/user/' + id)
-}
+  getById(id) {
+    return this.http.get('http://chehir.tn:3000/ranim/user/' + id);
+  }
 }
